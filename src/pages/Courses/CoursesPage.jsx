@@ -8,13 +8,15 @@ export function CoursesPage() {
 
   const { user } = useContext(AuthContext);
 
+  console.log(user);
+
   return (
     <div>
       <Courses />
-      {user && (
+      {user && user.isAuthorized && user.tipologia === "Admin" && (
         <>
           <CreateCourseForm token={user.token} />
-          <DeleteCourse token={user.token} /> 
+          
         </>
       )}
     </div>

@@ -5,6 +5,7 @@ import { CardCourses } from "../Card/CardCourses";
 
 export function Courses() {
     const [courses, setCourses] = useState([]);
+    const token = Cookies.get("token"); 
 
     useEffect(() => {
         const token = Cookies.get("token");
@@ -12,7 +13,7 @@ export function Courses() {
         getAllCourses(token)
             .then(courses => setCourses(courses))
             .catch(error => console.error("Errore nella gestione dei corsi:", error));
-    }, []);
+    }, [token]);
 
     return (
         <div className="container">
@@ -28,6 +29,8 @@ export function Courses() {
                                 DescrizioneCompleta={course.descrizioneCompleta}
                                 Durata={course.durata}
                                 IdCategoria={course.idCategoria}
+                                CourseId={course.id} 
+                                Token={token}
                             />
                         ))
                     }

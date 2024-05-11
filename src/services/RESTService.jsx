@@ -1,7 +1,6 @@
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 
-
 export async function registerUser(user) {
     try {
         const jsonBody = JSON.stringify(user);
@@ -56,7 +55,7 @@ export async function loginUser(credentials, setUser) {
                 nome: decodedToken.nome,
                 cognome: decodedToken.cognome,
                 email: decodedToken.email,
-                tipologia: decodedToken.ruoli.length > 0 ? decodedToken.ruoli[0].tipologia : "",
+                tipologia: decodedToken && decodedToken.ruoli && decodedToken.ruoli.length > 0 ? "Admin" : "default",
                 isAuthorized: true,
                 token: JWTtoken
             });

@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from "../../contexts/AuthContext/AuthContext"
-import { isAdmin } from '../../utilis/authUtilis';
 import { UserList } from '../../components/User/UserList';
 import { UserCard } from '../../components/User/UserCard';
 import { getUserByEmail, getAllUsers, updateUser, deleteUser } from '../../services/RESTService';
@@ -27,7 +26,7 @@ export function UserPage() {
     }
 
     //Se l'utente è un amministratore, ottengo la lista di tutti gli utenti
-    if (isAdmin(user)) {
+    if (user && user.tipologia === 'Admin') {
       //Ottengo il token del contesto di autenticazione
       const token = user.token;
       getAllUsers(token)
@@ -102,14 +101,14 @@ export function UserPage() {
               <button className="btn btn-primary" onClick={handleUpdateUser}>Aggiorna Utente</button>
               <h3 className='mb-3 mt-3'>Elimina Utente</h3>
               <div className="mb-3">
-                <input type="text" className="form-control" value={deleteUserEmail} onChange={(e) => setDeleteUserEmail(e.target.value)} placeholder="Email Utente da eliminare" />
+                <input type="text" className="form-control" value={deleteUserEmail} onChange={(e) => setDeleteUserEmail(e.target.value)} placeholder="La tua email per eliminarti" />
               </div>
               <button className="btn btn-danger" onClick={handleDeleteUser}>Elimina Utente</button>
             </>
           )}
         </div>
       )}
-      {isAdmin(user) && allUsers.length > 0 && (
+      {user && user.tipologia === 'Admin' && allUsers.length > 0 && (
         <>
           <div>
             <h2 className="mb-4">Lista Utenti</h2>

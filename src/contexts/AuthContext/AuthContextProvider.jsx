@@ -12,12 +12,23 @@ export function AuthContextProvider({ children }) {
     const isAuthorized = false;
 
     // Ottieni il ruolo dell'utente dall'array ruoli
-    let tipologia = "";
+    let tipologia = null;
+
     const userDataString = Cookies.get("userData");
+    console.log("userDataString:", userDataString);
+
     if (userDataString) {
-        const userData = JSON.parse(userDataString);
-        if (userData && userData.ruoli && userData.ruoli.length > 0) {
-            tipologia = userData.ruoli[0].tipologia;
+        try {
+            const userData = JSON.parse(userDataString);
+            // Verifica che userData.ruoli sia un array non vuoto
+            if (Array.isArray(userData.ruoli) && userData.ruoli.length > 0) {
+                // Se userData.ruoli[0].tipologia esiste, assegna il valore a tipologia
+                if (userData.ruoli[0].tipologia) {
+                    tipologia = userData.ruoli[0].tipologia;
+                }
+            }
+        } catch (error) {
+            console.error("Errore nel parsing dei dati utente:", error);
         }
     }
 
@@ -29,6 +40,8 @@ export function AuthContextProvider({ children }) {
         tipologia,
         isAuthorized
     });
+
+    console.log("User from Cookies:", user);
 
     return (
         //sostituisce il valore del context di default

@@ -27,9 +27,11 @@ export function Login() {
         
         e.preventDefault();
         console.table(formLogin);
+        console.log("Form Login:", formLogin);
         
         try {
-            await loginUser(formLogin, setUser);
+            const userDataLogin = await loginUser(formLogin, setUser);
+            console.log("User Data from API:", userDataLogin);
             setShowAlert(true);
             //console.log("Login avvenuto con successo!");
             navigate('/home'); // Mi vado a reindirizzare alla pagina home dopo aver effettuato il login

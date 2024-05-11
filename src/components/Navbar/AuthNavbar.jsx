@@ -54,14 +54,14 @@ export function AuthNavbar() {
                                 <NavLink
                                     className="nav-link"
                                     to="/courses"
-                                >Courses
+                                >Corsi
                                 </NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink
                                     className="nav-link"
                                     to="/users"
-                                >Users
+                                >Utente
                                 </NavLink>
                             </li>
                             <li className="nav-item">

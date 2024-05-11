@@ -7,7 +7,7 @@ export function UserList({ userList }) {
       <h1 className="mt-4">Lista Utenti</h1>
       <div className="row">
         {userList.map(user => (
-          <div key={user.id} className="col-md-4 mb-4">
+          <div key={user.email} className="col-md-4 mb-4"> 
             <UserCard user={user} />
           </div>
         ))}
